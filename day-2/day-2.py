@@ -1,4 +1,4 @@
-# a tick tack toe solver
+# Top secret elven tick tack toe decryption library
 scores = {
     "win": 6,
     "draw": 3,
@@ -23,6 +23,12 @@ point_values = {
     "scissors": 3
 }
 
+expected_outcome = {
+    "X": 'loss',
+    "Y": 'draw',
+    "Z": 'win'
+}
+
 total_score: int = 0
 
 
@@ -39,12 +45,39 @@ def get_score(opponent, player):
         return point_values[response[player]] + scores['win']
 
 
+def select_appriopriate_response(opponent, expected_outcome):
+    if expected_outcome == 'win':
+        if play[opponent] == 'rock':
+            return 'Y'
+        elif play[opponent] == 'paper':
+            return 'Z'
+        elif play[opponent] == 'scissors':
+            return 'X'
+    elif expected_outcome == 'draw':
+        if play[opponent] == 'rock':
+            return 'X'
+        elif play[opponent] == 'paper':
+            return 'Y'
+        elif play[opponent] == 'scissors':
+            return 'Z'
+    elif expected_outcome == 'loss':
+        if play[opponent] == 'rock':
+            return 'Z'
+        elif play[opponent] == 'paper':
+            return 'X'
+        elif play[opponent] == 'scissors':
+            return 'Y'
+
+
 # load our inputs and similate our games
 with open('day-2/input.txt', 'r') as f:
     for line in f:
         opponent, player = line.strip().split(' ')
-        print(play[opponent], response[player])
-        total_score += get_score(opponent, player)
+        # part 2 stuff.
+        outcome = select_appriopriate_response(
+            opponent, expected_outcome[player])
+
+        total_score += get_score(opponent, outcome)
 
 
 print(f"Total score: {total_score}")
