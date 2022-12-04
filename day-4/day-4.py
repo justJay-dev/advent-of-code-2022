@@ -1,5 +1,6 @@
-def part1():
+def main():
     fully_contains = []
+    overlaps = []
     with open("day-4/input.txt") as f:
         data = f.read().split("\n")
         for pairs in data:
@@ -14,7 +15,12 @@ def part1():
             right = set(the_range[1])
             if left.issubset(right) or right.issubset(left):
                 fully_contains.append(pairs)
-    print(len(fully_contains))
+            # find if the ranges overlap
+            if any(x in right for x in left):
+                overlaps.append(pairs)
+
+    print("Part 1 solution: ", len(fully_contains))
+    print("Part 2 solution: ", len(overlaps))
 
 
-part1()
+main()
