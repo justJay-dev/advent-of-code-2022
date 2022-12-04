@@ -1,2 +1,2 @@
 merry:
-	python3 day-3/day-3.py
+	python3 day-4/day-4.py
